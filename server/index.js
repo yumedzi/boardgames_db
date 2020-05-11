@@ -7,7 +7,7 @@ const app = express()
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
-async function start () {
+async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
 
@@ -19,6 +19,10 @@ async function start () {
     const builder = new Builder(nuxt)
     await builder.build()
   }
+
+  app.get("/json", (req, res, next) => {
+    res.json({ "message": "Ok" })
+  });
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
