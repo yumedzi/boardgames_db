@@ -8,13 +8,13 @@
               <v-icon slot="prepend">mdi-cog-outline</v-icon>&nbsp;Settings
             </h1>
 
-            <v-switch
-              :value="dark_mode"
-              @change="toggleDarkMode"
+            <v-checkbox
+              :input-value="dark_mode"
+              @change="toggleDarkMode($event)"
               hide-details
               inset
-              :label="`Dark Mode: ${dark_mode?'On':'Off'}`"
-            ></v-switch>
+              :label="`Dark Mode: ${dark_mode}`"
+            ></v-checkbox>
           </v-card-text>
 
           <v-card-actions>
@@ -39,13 +39,16 @@ export default {
     return {}
   },
   methods: {
-    toggleDarkMode() {
-      console.log('Clicked on switch...')
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
-      console.log('DARK MODE is ' + this.$vuetify.theme.dark.toString())
-      localStorage.setItem('useDarkTheme', this.$vuetify.theme.dark.toString())
-      this.$store.commit('ui/SetDarkMode', this.$vuetify.theme.dark)
+    toggleDarkMode(new_value) {
+      new_value = Boolean(new_value)
+      console.log(`Current value is ${this.dark_mode}`)
+      this.$store.dispatch('ui/setDarkMode', new_value)
+      this.$vuetify.theme.dark = new_value
+      localStorage.setItem('useDarkTheme', new_value.toString())
     }
+  },
+  mounted() {
+    console.log(`Current dark mode from STORE is ${this.dark_mode}`)
   },
   computed: {
     genres() {
