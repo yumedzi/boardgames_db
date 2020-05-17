@@ -1,19 +1,43 @@
 <template>
   <v-container>
     <v-row>
-      <h2>
-        <v-icon>mdi-cards-playing-outline</v-icon>&nbsp;Boardgames Collection
-      </h2>
-    </v-row>
-
-    <v-row>
-      <v-data-table :headers="columns" :items="games" :items-per-page="5" class="elevation-1">
+      <v-data-table
+        :headers="columns"
+        :items="games"
+        :items-per-page="5"
+        class="elevation-1"
+        show-expand
+        :single-expand="singleExpand"
+      >
+        <template v-slot:top>
+          <v-toolbar flat>
+            <v-toolbar-title>
+              <v-icon>mdi-cards-playing-outline</v-icon>&nbsp;Boardgames Collection
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-switch v-model="singleExpand" label="Single expand" class="mt-2"></v-switch>
+          </v-toolbar>
+        </template>
         <template v-slot:item.genres="{ item }">
           <v-chip
             v-for="genre in item.genres"
             v-bind:key="genre._id"
             style="margin-right:5px;"
           >{{ genre.name }}</v-chip>
+        </template>
+        <template v-slot:expanded-item="{ headers, item }">
+          <td :colspan="headers.length">
+            <p class="text-left subtitle-1">{{ item.description }}</p>
+          </td>
+        </template>
+        <template v-slot:item.name="{ item }">
+          <nuxt-link class="gameLink" :to="{ path: `/game/${item._id}` }">
+            <v-avatar>
+              <img :src="item.image.url" v-if="item.image" />
+              <v-icon v-else>mdi-dice-5</v-icon>
+            </v-avatar>
+            {{ item.name }}
+          </nuxt-link>
         </template>
       </v-data-table>
     </v-row>
@@ -25,7 +49,7 @@ import { mapState } from 'vuex'
 
 export default {
   data() {
-    return {}
+    return { expanded: [], singleExpand: true }
   },
   async fetch({ store, error }) {
     try {
@@ -49,3 +73,9 @@ export default {
   }
 }
 </script>
+
+<style>
+a.gameLink {
+  text-decoration: none;
+}
+</style>
