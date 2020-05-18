@@ -129,7 +129,7 @@
               <v-file-input label="Rules (PDF)"></v-file-input>
             </v-card-text>
 
-            <v-card-actions>
+            <v-card-actions v-if="mode === 'add'">
               <v-btn color="primary" type="submit">
                 <v-icon>mdi-content-save</v-icon>&nbsp;Submit
               </v-btn>

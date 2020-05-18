@@ -4,7 +4,6 @@
       <v-col cols="12">
         <v-tabs
           class="elevation-2"
-          dark
           :grow="true"
           prev-icon="mdi-arrow-left-bold-box-outline"
           next-icon="mdi-arrow-right-bold-box-outline"

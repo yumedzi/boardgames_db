@@ -2,10 +2,10 @@
   <v-card class="mx-auto" outlined>
     <v-card-text>
       <v-row>
-        <v-col class="col-4">
-          <img width="200px" :src="currentGame.image ? currentGame.image.url : ''" />
+        <v-col cols="12" sm="3" md="4">
+          <img width="100%" :src="currentGame.image ? currentGame.image.url : ''" />
         </v-col>
-        <v-col class="col-8">
+        <v-col cols="12" sm="9" md="8">
           <v-row>
             <v-col class="d-flex align-content-center flex-wrap">
               <h1>{{ currentGame.name }}</h1>

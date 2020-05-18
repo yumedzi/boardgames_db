@@ -65,7 +65,7 @@ module.exports = {
       dark: true,
       themes: {
         light: {
-          primary: colors.purple,
+          primary: colors.teal,
           secondary: colors.grey.darken1,
           accent: colors.shades.black,
           error: colors.red.accent3,

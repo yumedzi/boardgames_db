@@ -15,7 +15,9 @@
               <v-icon>mdi-cards-playing-outline</v-icon>&nbsp;Boardgames Collection
             </v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-switch v-model="singleExpand" label="Single expand" class="mt-2"></v-switch>
+            <v-btn class="primary" @click="$router.push('/add/')">
+              <v-icon class="mr-2">mdi-sticker-plus-outline</v-icon>Add new game
+            </v-btn>
           </v-toolbar>
         </template>
         <template v-slot:item.genres="{ item }">

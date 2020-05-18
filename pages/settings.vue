@@ -8,13 +8,24 @@
           </v-card-title>
           <v-card-text>
             <v-divider></v-divider>
-            <v-checkbox
+            <v-switch
               :input-value="dark_mode"
               @change="toggleDarkMode($event)"
               hide-details
-              inset
-              :label="`Dark Mode: ${dark_mode}`"
-            ></v-checkbox>
+              :label="`Dark Mode: ${dark_mode ? 'ON' : 'OFF'}`"
+            ></v-switch>
+            <v-switch
+              :input-value="miniVariant"
+              @change="toggleMiniVariant($event)"
+              hide-details
+              :label="`Menu mini variant: ${miniVariant ? 'ON' : 'OFF'}`"
+            ></v-switch>
+            <v-switch
+              :input-value="menuPermanent"
+              @change="toggleMenuPermanent($event)"
+              hide-details
+              :label="`Menu permanent: ${menuPermanent ? 'ON' : 'OFF'}`"
+            ></v-switch>
           </v-card-text>
         </v-card>
       </v-col>
@@ -31,10 +42,20 @@ export default {
   methods: {
     toggleDarkMode(new_value) {
       new_value = Boolean(new_value)
-      console.log(`Current value is ${this.dark_mode}`)
       this.$store.dispatch('ui/setDarkMode', new_value)
       this.$vuetify.theme.dark = new_value
       localStorage.setItem('useDarkTheme', new_value.toString())
+    },
+    toggleMiniVariant(new_value) {
+      new_value = Boolean(new_value)
+      console.log(`Current value is ${this.miniVariant}`)
+      this.$store.dispatch('ui/setMiniVariant', new_value)
+      localStorage.setItem('miniVariant', new_value.toString())
+    },
+    toggleMenuPermanent(new_value) {
+      new_value = Boolean(new_value)
+      this.$store.dispatch('ui/setMenuPermanent', new_value)
+      localStorage.setItem('menuPermanent', new_value.toString())
     }
   },
   mounted() {
@@ -49,6 +70,12 @@ export default {
     },
     dark_mode() {
       return this.$store.state.ui.dark_mode
+    },
+    miniVariant() {
+      return this.$store.state.ui.miniVariant
+    },
+    menuPermanent() {
+      return this.$store.state.ui.menuPermanent
     }
   }
 }

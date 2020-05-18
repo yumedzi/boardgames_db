@@ -6,6 +6,7 @@
         :mini-variant="miniVariant"
         :clipped="clipped"
         fixed
+        :permanent="menuPermanent"
         app
       >
         <v-list>
@@ -20,10 +21,7 @@
         </v-list>
       </v-navigation-drawer>
       <v-app-bar :clipped-left="clipped" fixed app>
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-        <v-btn icon @click.stop="miniVariant = !miniVariant">
-          <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-        </v-btn>
+        <v-app-bar-nav-icon v-if="!menuPermanent" @click.stop="drawer = !drawer" />
 
         <v-toolbar-title v-text="title" />
       </v-app-bar>
@@ -42,16 +40,22 @@
 <script>
 export default {
   mounted() {
-    const theme = localStorage.getItem('useDarkTheme')
-    if (theme) {
-      let dark_mode = true
-      if (theme == 'false') {
-        dark_mode = false
-      }
-      console.log('dark mode from storage ' + dark_mode)
-      this.$store.dispatch('ui/setDarkMode', dark_mode)
-      this.$vuetify.theme.dark = dark_mode
-    }
+    const dark_storage = localStorage.getItem('useDarkTheme') || 'false'
+    const mini_storage = localStorage.getItem('miniVariant') || 'false'
+    const permament_storage = localStorage.getItem('menuPermanent') || 'false'
+
+    let dark_mode = dark_storage == 'true'
+    console.log('dark mode from storage ' + dark_mode)
+    this.$store.dispatch('ui/setDarkMode', dark_mode)
+    this.$vuetify.theme.dark = dark_mode
+
+    let miniVariant = mini_storage == 'true'
+    console.log('miniVariant from storage ' + miniVariant)
+    this.$store.dispatch('ui/setMiniVariant', miniVariant)
+
+    let menuPermanent = permament_storage == 'true'
+    console.log('menuPermanent from storage ' + menuPermanent)
+    this.$store.dispatch('ui/setMenuPermanent', menuPermanent)
   },
   data() {
     return {
@@ -80,10 +84,17 @@ export default {
           to: '/settings'
         }
       ],
-      miniVariant: false,
       right: true,
       rightDrawer: false,
       title: 'Boardgames DB'
+    }
+  },
+  computed: {
+    miniVariant() {
+      return this.$store.state.ui.miniVariant
+    },
+    menuPermanent() {
+      return this.$store.state.ui.menuPermanent
     }
   }
 }
