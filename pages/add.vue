@@ -1,5 +1,5 @@
 <template>
-  <GameEditor />
+  <GameEditor mode="add" />
 </template>
 
 

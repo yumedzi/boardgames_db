@@ -5,6 +5,9 @@ module.exports = {
   generate: {
     fallback: true
   },
+  // router: {
+  //   middleware: ['get_games', 'get_genres']
+  // },
   /*
   ** Headers of the page
   */

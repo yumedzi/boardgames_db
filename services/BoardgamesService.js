@@ -17,13 +17,20 @@ export default {
     return apiClient.get('/boardgames/' + id)
   },
   getGenres() {
-    return apiClient.get('/bg-genres')
+    return apiClient.get('/bg-genres/')
   },
   getGenre(id) {
     return apiClient.get('/bg-genres/' + id)
   },
   addGame(data) {
-    return apiClient.post('/boardgames', data).then(res => {
+    const json = JSON.stringify(data);
+    // const blob = new Blob([json], {
+    //   type: 'application/json'
+    // });
+    const form = new FormData();
+    form.append("data", json);
+
+    return apiClient.post('/boardgames', form).then(res => {
       console.log("RESULT is: " + res);
     })
   }

@@ -2,7 +2,7 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12">
-        <form @submit.prevent="addGame">
+        <form @submit.prevent="addGame" id="GameForm">
           <v-card class="mx-auto" outlined>
             <v-card-text>
               <h1 v-if="mode === 'add'">
@@ -126,7 +126,13 @@
                 </template>
               </v-range-slider>
               <!-- <v-file-input v-model="currentGame.image" label="Image"></v-file-input> -->
-              <v-file-input label="Rules (PDF)"></v-file-input>
+              <v-file-input
+                label="Image"
+                prepend-icon="mdi-camera"
+                v-model="currentGame.image"
+                accept="image/png, image/jpeg, image/bmp"
+              ></v-file-input>
+              <v-file-input label="Rules (PDF)" v-model="currentGame.rules"></v-file-input>
             </v-card-text>
 
             <v-card-actions v-if="mode === 'add'">
@@ -195,6 +201,9 @@ export default {
       // Fix min-max players
       this.currentGame.players_min = this.range[0]
       this.currentGame.players_max = this.range[1]
+      // form = document.getElementById("loginForm")
+      console.log(this.currentGame)
+
       GameService.addGame(this.currentGame)
     }
   },
@@ -205,16 +214,19 @@ export default {
       defaultGame: state => state.games.game
     })
   },
-  async fetch({ store, error }) {
-    try {
-      await store.dispatch('games/fetchGenres')
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: 'Unable to fetch events at this time. Please try again.'
-      })
-    }
-  },
+  // async fetch({ store, error }) {
+  //   console.log('Fetching genres')
+
+  //   try {
+  //     await store.dispatch('games/fetchGenres')
+  //   } catch (e) {
+  //     error({
+  //       statusCode: 503,
+  //       message: 'Unable to fetch events at this time. Please try again.'
+  //     })
+  //   }
+  // },
+  // middleware: 'get_genres',
   mounted() {
     console.log('Mount of Editor....')
     console.log(this.props)

@@ -53,26 +53,24 @@ export default {
   data() {
     return { expanded: [], singleExpand: true }
   },
-  async fetch({ store, error }) {
-    try {
-      await store.dispatch('games/fetchGames')
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: 'Unable to fetch events at this time. Please try again.'
-      })
-    }
-  },
+  // async fetch({ store, error }) {
+  //   try {
+  //     await store.dispatch('games/fetchGames')
+  //   } catch (e) {
+  //     error({
+  //       statusCode: 503,
+  //       message: 'Unable to fetch events at this time. Please try again.'
+  //     })
+  //   }
+  // },
   computed: {
-    something() {
-      return 25
-    },
     ...mapState({
       games: state => state.games.games,
       columns: state => state.games.columns,
       ui: state => state.main.ui
     })
   }
+  // middleware: ['get_games', 'get_genres']
 }
 </script>
 

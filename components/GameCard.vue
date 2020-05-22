@@ -100,16 +100,6 @@ export default {
       currentGame: {}
     }
   },
-  async fetch({ store, error }) {
-    try {
-      await store.dispatch('games/fetchGenres')
-    } catch (e) {
-      error({
-        statusCode: 503,
-        message: 'Unable to fetch events at this time. Please try again.'
-      })
-    }
-  },
   mounted() {
     console.log(this.game)
     this.currentGame = { ...this.game }

@@ -35,6 +35,8 @@
 
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   data() {
     return {}
@@ -62,21 +64,11 @@ export default {
     console.log(`Current dark mode from STORE is ${this.dark_mode}`)
   },
   computed: {
-    genres() {
-      return this.$store.state.games.genres
-    },
-    complexities() {
-      return this.$store.state.games.complexities
-    },
-    dark_mode() {
-      return this.$store.state.ui.dark_mode
-    },
-    miniVariant() {
-      return this.$store.state.ui.miniVariant
-    },
-    menuPermanent() {
-      return this.$store.state.ui.menuPermanent
-    }
+    ...mapState({
+      dark_mode: state => state.ui.dark_mode,
+      miniVariant: state => state.ui.miniVariant,
+      menuPermanent: state => state.ui.menuPermanent
+    })
   }
 }
 </script>

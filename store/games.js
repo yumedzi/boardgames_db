@@ -1,7 +1,7 @@
 import GameService from '@/services/BoardgamesService.js'
 
 export const state = () => ({
-  games_loaded: false,
+  // games_loaded: false,
   game: { playtime: 30 },
   games: [],
   genres: [],
@@ -21,6 +21,7 @@ export const state = () => ({
 
 export const mutations = {
   SET_GAMES(state, games) {
+    // state.games = games
     state.games = games
   },
   SET_GAME(state, game) {
@@ -39,14 +40,11 @@ export const actions = {
     return commit('SET_GAME', game)
   },
   fetchGames({ state, commit }) {
-    if (!state.games_loaded) {
+    if (!state.games.length) {
       return GameService.getGames().then(response => {
         commit('SET_GAMES', response.data)
-      }).then(
-        commit('SET_LOADED', true)
-      )
-    } else {
-      console.log("No need to query...")
+        // console.log(response.data);
+      })
     }
   },
   fetchGame({ commit }, id) {
@@ -54,10 +52,12 @@ export const actions = {
       commit('SET_GAME', response.data)
     })
   },
-  fetchGenres({ commit }) {
-    return GameService.getGenres().then(response => {
-      commit('SET_GENRES', response.data)
-    })
+  fetchGenres({ state, commit }) {
+    if (!state.genres.length) {
+      return GameService.getGenres().then(response => {
+        commit('SET_GENRES', response.data)
+      })
+    }
   }
 }
 

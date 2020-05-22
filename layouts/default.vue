@@ -96,6 +96,7 @@ export default {
     menuPermanent() {
       return this.$store.state.ui.menuPermanent
     }
-  }
+  },
+  middleware: ['get_games', 'get_genres']
 }
 </script>
