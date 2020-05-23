@@ -43,16 +43,13 @@ export default {
     const dark_storage = localStorage.getItem('useDarkTheme') || 'false'
     const mini_storage = localStorage.getItem('miniVariant') || 'false'
     const permament_storage = localStorage.getItem('menuPermanent') || 'false'
-
     let dark_mode = dark_storage == 'true'
     console.log('dark mode from storage ' + dark_mode)
     this.$store.dispatch('ui/setDarkMode', dark_mode)
     this.$vuetify.theme.dark = dark_mode
-
     let miniVariant = mini_storage == 'true'
     console.log('miniVariant from storage ' + miniVariant)
     this.$store.dispatch('ui/setMiniVariant', miniVariant)
-
     let menuPermanent = permament_storage == 'true'
     console.log('menuPermanent from storage ' + menuPermanent)
     this.$store.dispatch('ui/setMenuPermanent', menuPermanent)

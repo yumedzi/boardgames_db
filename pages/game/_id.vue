@@ -20,7 +20,7 @@
             <v-icon class="mr-2">mdi-script-text</v-icon>Description
           </v-tab>
 
-          <v-tab v-if="!game.rules" href="#rules" key="rules">
+          <v-tab v-if="game.rules" href="#rules" key="rules">
             <v-icon class="mr-2">mdi-microsoft-xbox-controller-menu</v-icon>Rules
           </v-tab>
 
@@ -43,9 +43,21 @@
           <v-tab-item key="rules" value="rules">
             <v-card flat tile>
               <v-card-text>
-                <div
-                  v-if-not="this.game.rules"
-                >There are no rules in this game! Improvise (or find and attach PDF)! 😎</div>
+                <v-alert
+                  type="info"
+                >By clicking the following button you will download/read rules in PDF file.</v-alert>
+                <div class="d-flex justify-center">
+                  <v-btn
+                    x-large
+                    color="success"
+                    rounded
+                    outlined
+                    v-if="game.rules"
+                    :href="game.rules.url"
+                  >
+                    <v-icon left>mdi-cloud-download</v-icon>Download Rules
+                  </v-btn>
+                </div>
               </v-card-text>
             </v-card>
           </v-tab-item>

@@ -18,6 +18,18 @@
           </v-row>
           <v-row>
             <v-col>
+              <v-rating
+                class="d-flex justify-center"
+                style="margin-top: -25px; margin-bottom: -20px;"
+                :value="currentGame.rating"
+                :readonly="true"
+                full-icon="mdi-heart"
+                empty-icon="mdi-heart-outline"
+              ></v-rating>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
               <v-divider class="mb-3" />
               <p>
                 <v-icon class="mr-2" slot="prepend">mdi-script-outline</v-icon>

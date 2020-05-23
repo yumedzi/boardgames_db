@@ -13,6 +13,18 @@
                 <v-icon slot="prepend">mdi-dice-5</v-icon>
               </v-text-field>
 
+              <p class="subtitle-1">
+                <v-icon slot="prepend" class="mr-2">mdi-star</v-icon>Rating
+              </p>
+              <v-rating
+                class="d-flex justify-center mb-2"
+                style="margin-top: -20px;"
+                v-model="currentGame.rating"
+                full-icon="mdi-heart"
+                empty-icon="mdi-heart-outline"
+                hover
+              ></v-rating>
+
               <v-text-field
                 name="short_description"
                 v-model="currentGame.short_description"
@@ -163,17 +175,20 @@ export default {
       this.currentGame.genres = [...this.currentGame.genres]
     },
     addOrUpdateGame() {
+      const fileTypes = ['image', 'rules']
       // Updating object with sliders data
       this.currentGame.players_min = this.players_number_range[0]
       this.currentGame.players_max = this.players_number_range[1]
 
       let data = { ...this.currentGame }
-      delete data.image
+      for (let fileInput of fileTypes) {
+        delete data[fileInput]
+      }
       let formData = new FormData()
       formData.append('data', JSON.stringify(data))
       // console.log(this.$refs.GameForm.image)
 
-      for (let fileInput of ['image', 'rules']) {
+      for (let fileInput of fileTypes) {
         try {
           if (this.currentGame[fileInput].size) {
             formData.append(
@@ -186,6 +201,7 @@ export default {
           console.log(`"No ${fileInput} file attached"`)
         }
       }
+      console.log(data)
 
       if (this.mode === 'add') {
         this.$store.dispatch('games/addGame', { formData })
