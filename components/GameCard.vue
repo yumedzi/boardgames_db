@@ -63,11 +63,11 @@
                   <v-toolbar-title>Update game</v-toolbar-title>
                   <v-spacer></v-spacer>
                   <v-toolbar-items>
-                    <v-btn dark text @click="editDialog = false">Save</v-btn>
+                    <v-btn dark text @click="updateGame">Save</v-btn>
                   </v-toolbar-items>
                 </v-toolbar>
                 <v-card-text>
-                  <GameEditor :editGame="currentGame" mode="edit" />
+                  <GameEditor :game="currentGame" mode="edit" ref="GameEditor" />
                 </v-card-text>
               </v-card>
             </v-dialog>
@@ -95,14 +95,19 @@ export default {
   },
   data() {
     return {
-      currentGame: {},
-      editDialog: false,
-      currentGame: {}
+      editDialog: false
     }
   },
-  mounted() {
-    console.log(this.game)
-    this.currentGame = { ...this.game }
+  computed: {
+    ...mapState({
+      currentGame: state => state.games.game
+    })
+  },
+  methods: {
+    updateGame() {
+      this.$refs.GameEditor.addOrUpdateGame()
+      this.editDialog = false
+    }
   }
 }
 </script>

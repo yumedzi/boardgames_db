@@ -42,7 +42,11 @@
 
           <v-tab-item key="rules" value="rules">
             <v-card flat tile>
-              <v-card-text>{{ text }}</v-card-text>
+              <v-card-text>
+                <div
+                  v-if-not="this.game.rules"
+                >There are no rules in this game! Improvise (or find and attach PDF)! 😎</div>
+              </v-card-text>
             </v-card>
           </v-tab-item>
         </v-tabs>
@@ -63,10 +67,7 @@ export default {
   },
   data() {
     return {
-      game: {},
-      new_game: { playtime: 30 },
-      tabs: 4,
-      text: 'asdasdsd'
+      tabs: 4
     }
   },
   methods: {
@@ -84,8 +85,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      getGameById: 'games/getGameById'
+    ...mapState({
+      game: state => state.games.game
     })
   },
   async fetch({ store, error }) {
@@ -99,7 +100,9 @@ export default {
     }
   },
   mounted() {
-    this.game = this.getGameById(this.$route.params.id)
+    this.$store.dispatch('games/setCurrentGameById', {
+      id: this.$route.params.id
+    })
   }
 }
 </script>

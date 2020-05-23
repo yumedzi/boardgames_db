@@ -69,6 +69,11 @@ export default {
           to: '/'
         },
         {
+          icon: 'mdi-dice-multiple',
+          title: 'All games',
+          to: '/list'
+        },
+        {
           icon: 'mdi-shuffle-variant',
           title: 'Random',
           to: '/random'
@@ -96,7 +101,7 @@ export default {
     menuPermanent() {
       return this.$store.state.ui.menuPermanent
     }
-  },
-  middleware: ['get_games', 'get_genres']
+  }
+  // middleware: ['get_games', 'get_genres']
 }
 </script>

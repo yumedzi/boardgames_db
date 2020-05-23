@@ -2,7 +2,8 @@ import GameService from '@/services/BoardgamesService.js'
 
 export const state = () => ({
   // games_loaded: false,
-  game: { playtime: 30 },
+  game: {},
+  defaultGame: { playtime: 30, players_min: 2, players_max: 4 },
   games: [],
   genres: [],
   complexities: ['easy', 'medium', 'hard', 'ultra'],
@@ -27,6 +28,14 @@ export const mutations = {
   SET_GAME(state, game) {
     state.game = game
   },
+  ADD_GAME(state, game) {
+    state.games.push(game)
+  },
+  UPDATE_GAME(state, newGame) {
+    // state.games.forEach(function (oldGame, i) { if (oldGame.id == newGame.id) state.games[i] = newGame })
+    state.games = state.games.map(obj => obj.id === newGame.id ? newGame : obj)
+    state.game = newGame
+  },
   SET_GENRES(state, genres) {
     state.genres = genres
   },
@@ -36,8 +45,8 @@ export const mutations = {
 }
 
 export const actions = {
-  setGame({ commit }, game) {
-    return commit('SET_GAME', game)
+  setCurrentGameById({ state, commit }, { id }) {
+    return commit('SET_GAME', state.games.find(element => element.id === id))
   },
   fetchGames({ state, commit }) {
     if (!state.games.length) {
@@ -58,7 +67,20 @@ export const actions = {
         commit('SET_GENRES', response.data)
       })
     }
+  },
+  addGame({ commit, router }, { formData }) {
+    return GameService.addGame(formData).then(response => {
+      commit('ADD_GAME', response)
+      // REDIRECT TO NEWLY CREATED GAME
+      this.app.router.push(`/game/${response.id}`)
+    })
+  },
+  updateGame({ commit }, { formData, id }) {
+    return GameService.updateGame(formData, id).then(response => {
+      commit('UPDATE_GAME', response)
+    })
   }
+  // updateGame
 }
 
 export const getters = {

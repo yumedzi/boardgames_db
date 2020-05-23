@@ -22,16 +22,14 @@ export default {
   getGenre(id) {
     return apiClient.get('/bg-genres/' + id)
   },
-  addGame(data) {
-    const json = JSON.stringify(data);
-    // const blob = new Blob([json], {
-    //   type: 'application/json'
-    // });
-    const form = new FormData();
-    form.append("data", json);
-
-    return apiClient.post('/boardgames', form).then(res => {
-      console.log("RESULT is: " + res);
+  addGame(formData) {
+    return apiClient.post('/boardgames', formData).then(res => {
+      return res.data
+    })
+  },
+  updateGame(formData, id) {
+    return apiClient.put(`/boardgames/${id}`, formData).then(res => {
+      return res.data
     })
   }
 }
