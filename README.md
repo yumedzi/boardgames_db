@@ -1,22 +1,18 @@
-# bg_db
+#  Boardgames DB
 
-> Boardgames DB
+[Live app](https://boardgames-db.netlify.app)
 
-## Build Setup
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5bfc3980-b3e6-4ed3-8d61-70d0c84e79a5/deploy-status)](https://app.netlify.com/sites/boardgames-db/deploys)
 
-```bash
-# install dependencies
-$ npm install
+> Home Boardgames collection DB
 
-# serve with hot reload at localhost:3000
-$ npm run dev
+Stack:
+* VueJS
+* Vuetify
+* NuxtJS
+* Atlas MongoDB
+* Strapi
 
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+Deployed via:
+* Netlify
+* Google AppEngine
