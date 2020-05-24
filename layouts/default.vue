@@ -30,6 +30,9 @@
           <nuxt />
         </v-container>
       </v-content>
+      <v-overlay :value="loading">
+        <v-progress-circular indeterminate size="64"></v-progress-circular>
+      </v-overlay>
       <v-footer :fixed="fixed" app>
         <span>&copy; {{ new Date().getFullYear() }}</span>
       </v-footer>
@@ -38,6 +41,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   mounted() {
     const dark_storage = localStorage.getItem('useDarkTheme') || 'false'
@@ -92,12 +97,11 @@ export default {
     }
   },
   computed: {
-    miniVariant() {
-      return this.$store.state.ui.miniVariant
-    },
-    menuPermanent() {
-      return this.$store.state.ui.menuPermanent
-    }
+    ...mapState({
+      miniVariant: state => state.ui.miniVariant,
+      menuPermanent: state => state.ui.menuPermanent,
+      loading: state => state.ui.loading
+    })
   }
   // middleware: ['get_games', 'get_genres']
 }

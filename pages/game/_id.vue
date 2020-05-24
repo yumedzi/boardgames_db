@@ -36,7 +36,7 @@
 
           <v-tab-item key="desc" value="desc">
             <v-card class="mx-2 pa-2" flat tile outlined>
-              <v-card-text>{{ game.description }}</v-card-text>
+              <div v-html="$md.render(game.description)"></div>
             </v-card>
           </v-tab-item>
 

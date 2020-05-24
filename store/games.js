@@ -68,16 +68,19 @@ export const actions = {
       })
     }
   },
-  addGame({ commit, router }, { formData }) {
+  addGame({ commit, dispatch }, { formData }) {
+    dispatch('ui/setLoading', true, { root: true })
     return GameService.addGame(formData).then(response => {
       commit('ADD_GAME', response)
-      // REDIRECT TO NEWLY CREATED GAME
+      dispatch('ui/setLoading', false, { root: true })
       this.app.router.push(`/game/${response.id}`)
     })
   },
-  updateGame({ commit }, { formData, id }) {
+  updateGame({ commit, dispatch }, { formData, id }) {
+    dispatch('ui/setLoading', true, { root: true })
     return GameService.updateGame(formData, id).then(response => {
       commit('UPDATE_GAME', response)
+      dispatch('ui/setLoading', false, { root: true })
     })
   }
   // updateGame

@@ -1,7 +1,8 @@
 export const state = () => ({
   "dark_mode": true,
   "miniVariant": false,
-  "menuPermanent": false
+  "menuPermanent": false,
+  "loading": false
 })
 
 export const mutations = {
@@ -13,6 +14,9 @@ export const mutations = {
   },
   SET_PERMANENT(state, menuPermanent) {
     state.menuPermanent = menuPermanent
+  },
+  SET_LOADING(state, loading) {
+    state.loading = loading
   }
 }
 
@@ -25,5 +29,8 @@ export const actions = {
   },
   setMenuPermanent({ commit }, menuPermanent) {
     commit('SET_PERMANENT', menuPermanent)
+  },
+  setLoading({ commit }, loading) {
+    commit('SET_LOADING', loading)
   }
 }

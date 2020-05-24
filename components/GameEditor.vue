@@ -217,7 +217,7 @@ export default {
     ...mapState({
       genres: state => state.games.genres,
       complexities: state => state.games.complexities,
-      defaultGame: state => state.games.game
+      defaultGame: state => state.games.defaultGame
     })
   },
   // async fetch({ store, error }) {

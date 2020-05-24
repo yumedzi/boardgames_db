@@ -51,7 +51,9 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    // Doc: https://github.com/nuxt-community/modules/tree/master/packages/markdownit
+    '@nuxtjs/markdownit'
   ],
   /*
   ** Axios module configuration
@@ -86,6 +88,12 @@ module.exports = {
         }
       }
     }
+  },
+  markdownit: {
+    injected: true,
+    preset: 'default',
+    linkify: true,
+    breaks: true
   },
   /*
   ** Build configuration
