@@ -35,6 +35,8 @@
       </v-overlay>
       <v-footer :fixed="fixed" app>
         <span>&copy; {{ new Date().getFullYear() }}</span>
+        <v-spacer></v-spacer>
+        <span>&copy; Viktor Moyseyenko</span>
       </v-footer>
     </v-app>
   </client-only>
@@ -84,6 +86,11 @@ export default {
           icon: 'mdi-sticker-plus-outline',
           title: 'ADD',
           to: '/add'
+        },
+        {
+          icon: 'mdi-help-circle',
+          title: 'About',
+          to: '/about'
         },
         {
           icon: 'mdi-cog-outline',

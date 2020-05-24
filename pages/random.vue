@@ -1,19 +1,13 @@
-<template>
-  <v-layout>
-    <v-flex class="text-center">
-      <img
-        src="/v.png"
-        alt="Vuetify.js"
-        class="mb-5"
-      >
-      <blockquote class="blockquote">
-        &#8220;First, solve the problem. Then, write the code.&#8221;
-        <footer>
-          <small>
-            <em>&mdash;John Johnson</em>
-          </small>
-        </footer>
-      </blockquote>
-    </v-flex>
-  </v-layout>
-</template>
+<template></template>
+
+<script>
+export default {
+  mounted() {
+    let randGame = this.$store.state.games.games[
+      Math.floor(Math.random() * this.$store.state.games.games.length)
+    ]
+    console.log(`Random game selected, id: ${randGame.id}`)
+    this.$router.push(`/game/${randGame.id}`)
+  }
+}
+</script>
