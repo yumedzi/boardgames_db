@@ -10,8 +10,24 @@
           >
             <v-sheet :color="game.image ? 'transparent' : colors[i % colors.length]" height="100%">
               <v-row class="fill-height" align="center" justify="center">
-                <div class="game-title">
-                  <nuxt-link :to="`/game/${game.id}`">{{ game.name }}</nuxt-link>
+                <div class="game-sheet">
+                  <nuxt-link
+                    class="d-flex justify-center game-title"
+                    :to="`/game/${game.id}`"
+                  >{{ game.name }}</nuxt-link>
+                  <v-rating
+                    class="d-flex justify-center"
+                    :value="game.rating"
+                    :readonly="true"
+                    color="white"
+                    full-icon="mdi-heart"
+                    empty-icon="mdi-heart-outline"
+                  ></v-rating>
+                  <v-divider v-if="game.short_description"></v-divider>
+                  <p
+                    class="game-description"
+                    v-if="game.short_description"
+                  >{{ game.short_description }}</p>
                 </div>
               </v-row>
             </v-sheet>
@@ -36,7 +52,8 @@ export default {
         'pink darken-2',
         'red lighten-1',
         'deep-purple accent-4'
-      ]
+      ],
+      overlay: false
     }
   },
   // async fetch({ store, error }) {
@@ -61,13 +78,33 @@ export default {
 </script>
 
 <style>
-a.gameLink {
-  text-decoration: none;
+.game-sheet {
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 1vw;
+  padding: 20px;
 }
 
 .game-title {
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
   font-size: 16px;
   font-size: 4vw;
-  background-color: black;
+  font-weight: bold;
+
+  color: white !important;
+  text-shadow: 4px 4px 7px rgba(9, 9, 9, 0.71);
+
+  color: #ffffff;
+  text-shadow: 0 1px 0 #cccccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+    0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+    0 20px 20px rgba(0, 0, 0, 0.15);
+  color: #ffffff;
+}
+
+.game-description {
+  font-size: 12px;
+  font-size: 2vw;
 }
 </style>
