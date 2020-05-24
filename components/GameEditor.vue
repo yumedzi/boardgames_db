@@ -168,11 +168,7 @@ export default {
   },
   methods: {
     remove(item) {
-      this.currentGame.genres.splice(
-        this.currentGame.genres.indexOf(item.name),
-        1
-      )
-      this.currentGame.genres = [...this.currentGame.genres]
+      this.currentGame.genres.splice(this.currentGame.genres.indexOf(item), 1)
     },
     addOrUpdateGame() {
       const fileTypes = ['image', 'rules']
