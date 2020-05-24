@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env' })
 const colors = require('vuetify/es5/util/colors').default
 
 module.exports = {
@@ -20,7 +21,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: 'https://nuxtjs.org/favicon.ico' }
     ]
   },
   /*
@@ -53,7 +54,8 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
     // Doc: https://github.com/nuxt-community/modules/tree/master/packages/markdownit
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    '@nuxtjs/auth'
   ],
   /*
   ** Axios module configuration
@@ -94,6 +96,19 @@ module.exports = {
     preset: 'default',
     linkify: true,
     breaks: true
+  },
+  auth: {
+    redirect: {
+      login: '/', // redirect user when not connected
+      callback: '/auth/signed-in'
+    },
+    strategies: {
+      local: false,
+      auth0: {
+        domain: process.env.AUTH0_DOMAIN,
+        client_id: process.env.AUTH0_CLIENT_ID
+      }
+    }
   },
   /*
   ** Build configuration

@@ -11,7 +11,7 @@
               <h1>{{ currentGame.name }}</h1>
             </v-col>
             <v-col class="text-right">
-              <v-btn color="primary" @click="editDialog = true">
+              <v-btn v-if="$auth.loggedIn" color="primary" @click="editDialog = true">
                 <v-icon class="mr-1">mdi-file-document-edit</v-icon>Edit
               </v-btn>
             </v-col>
