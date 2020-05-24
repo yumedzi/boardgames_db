@@ -13,6 +13,7 @@
                 <div class="game-sheet">
                   <nuxt-link
                     class="d-flex justify-center game-title"
+                    :class="{'display-1': $vuetify.breakpoint. smAndDown, 'display-2': $vuetify.breakpoint. mdAndUp}"
                     :to="`/game/${game.id}`"
                   >{{ game.name }}</nuxt-link>
                   <v-rating
@@ -25,7 +26,7 @@
                   ></v-rating>
                   <v-divider v-if="game.short_description"></v-divider>
                   <p
-                    class="game-description"
+                    :class="{'subheading': $vuetify.breakpoint. smAndDown, 'display-1': $vuetify.breakpoint. mdAndUp}"
                     v-if="game.short_description"
                   >{{ game.short_description }}</p>
                 </div>
@@ -87,8 +88,6 @@ export default {
 .game-title {
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
-  font-size: 16px;
-  font-size: 4vw;
   font-weight: bold;
 
   color: white !important;
@@ -101,10 +100,5 @@ export default {
     0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
     0 20px 20px rgba(0, 0, 0, 0.15);
   color: #ffffff;
-}
-
-.game-description {
-  font-size: 12px;
-  font-size: 2vw;
 }
 </style>
