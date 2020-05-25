@@ -80,7 +80,7 @@ export default {
 
 <style>
 .game-sheet {
-  background: rgba(0, 0, 0, 0.45);
+  background: rgba(0, 0, 0, 0.6);
   border-radius: 1vw;
   padding: 20px;
 }

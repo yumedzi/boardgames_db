@@ -70,7 +70,8 @@ export const actions = {
   },
   addGame({ commit, dispatch }, { formData }) {
     dispatch('ui/setLoading', true, { root: true })
-    return GameService.addGame(formData).then(response => {
+    let token = this.app.$auth.getToken('auth0')
+    return GameService.addGame(formData, token).then(response => {
       commit('ADD_GAME', response)
       dispatch('ui/setLoading', false, { root: true })
       this.app.router.push(`/game/${response.id}`)
@@ -78,7 +79,8 @@ export const actions = {
   },
   updateGame({ commit, dispatch }, { formData, id }) {
     dispatch('ui/setLoading', true, { root: true })
-    return GameService.updateGame(formData, id).then(response => {
+    let token = this.app.$auth.getToken('auth0')
+    return GameService.updateGame(formData, id, token).then(response => {
       commit('UPDATE_GAME', response)
       dispatch('ui/setLoading', false, { root: true })
     })
