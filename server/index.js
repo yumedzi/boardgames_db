@@ -1,11 +1,7 @@
 const express = require('express')
-const cors = require('cors')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const app = express()
-
-// CORS enable
-app.use(cors())
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
@@ -23,12 +19,6 @@ async function start() {
     const builder = new Builder(nuxt)
     await builder.build()
   }
-
-  app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-
 
   app.get("/json", (req, res, next) => {
     res.json({ "message": "Ok" })

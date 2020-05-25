@@ -9,7 +9,7 @@
         :permanent="menuPermanent"
         app
       >
-        <v-list v-for="(items, j) in linkGroups" style="margin-top: 0px">
+        <v-list v-for="(items, j) in linkGroups" :key="j" style="margin-top: 0px">
           <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
@@ -18,9 +18,7 @@
               <v-list-item-title v-text="item.title" />
             </v-list-item-content>
           </v-list-item>
-          <v-slot:append-item v-if="j != linkGroups.length - 1 ">
-            <v-divider class="mt-4"></v-divider>
-          </v-slot:append-item>
+          <v-divider class="mt-4" v-if="j != linkGroups.length - 1"></v-divider>
         </v-list>
       </v-navigation-drawer>
       <v-app-bar :clipped-left="clipped" fixed app>
