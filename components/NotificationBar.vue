@@ -1,11 +1,10 @@
 <template>
-  <div class="notification-bar" :class="notificationTypeClass">
-    <p>{{ notification.message }}</p>
-  </div>
+  <v-alert :type="notification.type">{{ notification.message }}</v-alert>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+
 export default {
   props: {
     notification: {
@@ -13,16 +12,14 @@ export default {
       required: true
     }
   },
-  computed: {
-    notificationTypeClass() {
-      return `-text-${this.notification.type}`
-    }
-  },
   methods: {
-    ...mapActions('notification', ['remove'])
+    ...mapActions('notifications', ['remove'])
   },
   mounted() {
-    setTimeout(this.remove(this.notification), 5000)
+    this.timeout = setTimeout(() => this.remove(this.notification), 5000)
+  },
+  beforeDestroy() {
+    clearTimeout(this.timeout)
   }
 }
 </script>

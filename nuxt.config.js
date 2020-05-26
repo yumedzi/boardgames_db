@@ -73,14 +73,16 @@ module.exports = {
       dark: true,
       themes: {
         light: {
-          primary: colors.teal,
+          // primary: colors.teal,
+          primary: colors.deepPurple.darken2,
           secondary: colors.grey.darken1,
           accent: colors.shades.black,
           error: colors.red.accent3,
           background: colors.indigo.lighten5 // Added variable
         },
         dark: {
-          primary: colors.blue.darken2,
+          // primary: colors.blue.darken2,
+          primary: colors.teal,
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,

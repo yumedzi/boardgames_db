@@ -75,6 +75,7 @@ export const actions = {
       commit('ADD_GAME', response)
       dispatch('ui/setLoading', false, { root: true })
       this.app.router.push(`/game/${response.id}`)
+      dispatch('notifications/add', { message: 'Game added successfully' }, { root: true })
     })
   },
   updateGame({ commit, dispatch }, { formData, id }) {
@@ -83,6 +84,7 @@ export const actions = {
     return GameService.updateGame(formData, id, token).then(response => {
       commit('UPDATE_GAME', response)
       dispatch('ui/setLoading', false, { root: true })
+      dispatch('notifications/add', { message: 'Game updated successfully' }, { root: true })
     })
   }
   // updateGame

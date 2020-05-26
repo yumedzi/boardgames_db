@@ -197,7 +197,7 @@ export default {
           console.log(`"No ${fileInput} file attached"`)
         }
       }
-      console.log(data)
+      // console.log(data)
 
       if (this.mode === 'add') {
         this.$store.dispatch('games/addGame', { formData })

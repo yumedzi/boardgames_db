@@ -24,7 +24,7 @@ export default {
     return apiClient.get('/bg-genres/' + id)
   },
   addGame(formData, token) {
-    return apiClient.post('/boardgames', formData).then(res => {
+    return apiClient.post('/boardgames', formData, { headers: { "Authorization": token } }).then(res => {
       return res.data
     })
   },

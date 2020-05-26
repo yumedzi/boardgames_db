@@ -60,9 +60,6 @@ export default {
       localStorage.setItem('menuPermanent', new_value.toString())
     }
   },
-  mounted() {
-    console.log(`Current dark mode from STORE is ${this.dark_mode}`)
-  },
   computed: {
     ...mapState({
       dark_mode: state => state.ui.dark_mode,

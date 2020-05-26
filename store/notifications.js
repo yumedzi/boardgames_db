@@ -1,14 +1,15 @@
-let nextId = 1
+let nextId = 2
 
 export const namespaced = true
 
-export const state = {
+export const state = () => ({
   notifications: []
-}
+})
 
 export const mutations = {
   PUSH(state, notification) {
     state.notifications.push({
+      type: 'info',
       ...notification,
       id: nextId++
     })
